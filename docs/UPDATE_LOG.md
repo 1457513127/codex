@@ -24,4 +24,4 @@
 Notion 同步：
 
 - 已写入 [和趣亲子活动平台 - 产品与代码更新日志](https://www.notion.so/36c9f99b7c3980d2a516fe864dfd780d)。
-- GitHub 发布完成后，将最终提交链接追加到 Notion 记录中。
+- GitHub 提交 `a86f7b2` 的发布链接已补录至 Notion 记录。
