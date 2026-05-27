@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>和趣社群店铺交易履约闭环 - 项目会同步原型</title>
+  <title>和趣首次全员产品立项会演示原型</title>
   <script src="./assets/lucide.min.js"></script>
   <link rel="stylesheet" href="../design-system/airbnb-tokens.css">
   <style>
@@ -15,121 +15,94 @@
       --muted: var(--color-muted);
       --line: var(--color-hairline);
       --action: var(--color-action);
-      --error: var(--color-error);
+      --on-action: var(--color-on-action);
       --shadow: var(--shadow-float);
     }
     * { box-sizing: border-box; }
     html, body { background: var(--surface); color: var(--ink); font-family: var(--font-family-sans); margin: 0; min-height: 100%; }
     button { background: transparent; border: 0; color: inherit; cursor: pointer; font: inherit; }
     button:focus-visible { outline: 3px solid var(--color-action-focus); outline-offset: 2px; }
-    .shell { display: grid; grid-template-columns: 304px 1fr; min-height: 100vh; }
-    .side { border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 20px; padding: 24px 18px; }
+    .shell { display: grid; grid-template-columns: 300px 1fr; min-height: 100vh; }
+    .side { border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 18px; padding: 22px 18px; }
     .brand { align-items: center; display: flex; gap: 12px; padding: 0 8px; }
-    .logo { align-items: center; background: var(--action); border-radius: var(--radius-sm); color: var(--color-on-action); display: flex; font-size: 22px; font-weight: 700; height: 42px; justify-content: center; width: 42px; }
+    .logo { align-items: center; background: var(--action); border-radius: var(--radius-sm); color: var(--on-action); display: flex; font-size: 22px; font-weight: 800; height: 42px; justify-content: center; width: 42px; }
     .brand strong { display: block; font-size: 18px; }
-    .brand span { color: var(--muted); display: block; font-size: 12px; margin-top: 3px; }
+    .brand span, .muted { color: var(--muted); }
+    .brand span { display: block; font-size: 12px; margin-top: 3px; }
     .label { color: var(--muted); font-size: 12px; font-weight: 700; padding: 0 8px; }
     .route { display: grid; gap: 5px; }
-    .route button { align-items: center; border-radius: var(--radius-md); color: var(--muted); display: flex; gap: 12px; min-height: 48px; padding: 9px 12px; text-align: left; }
+    .route button { align-items: center; border-radius: var(--radius-md); color: var(--muted); display: flex; gap: 10px; min-height: 42px; padding: 8px 10px; text-align: left; }
     .route button.active, .route button:hover { background: var(--soft); color: var(--ink); font-weight: 700; }
-    .route svg { height: 20px; width: 20px; }
+    .route svg { color: var(--action); height: 18px; width: 18px; }
     .side-note { background: var(--soft); border-radius: var(--radius-md); color: var(--body); font-size: 12px; line-height: 1.6; margin-top: auto; padding: 14px; }
-    .side-note strong { color: var(--ink); display: block; font-size: 13px; margin-bottom: 4px; }
     .main { padding: 24px 30px; }
-    .topbar { align-items: flex-start; display: flex; gap: 18px; justify-content: space-between; margin-bottom: 20px; }
-    .topbar h1 { font-size: 24px; line-height: 1.35; margin: 0 0 5px; }
+    .topbar { align-items: flex-start; display: flex; gap: 18px; justify-content: space-between; margin-bottom: 18px; }
+    .topbar h1 { font-size: 25px; line-height: 1.3; margin: 0 0 5px; }
     .topbar p { color: var(--muted); font-size: 13px; margin: 0; }
-    .tag { align-items: center; background: var(--soft); border: 1px solid var(--line); border-radius: var(--radius-full); color: var(--body); display: inline-flex; font-size: 13px; gap: 6px; padding: 8px 12px; white-space: nowrap; }
-    .stage { align-items: start; display: grid; gap: 26px; grid-template-columns: minmax(480px, 1fr) minmax(330px, 396px); }
+    .tag { align-items: center; background: var(--soft); border: 1px solid var(--line); border-radius: var(--radius-full); display: inline-flex; font-size: 12px; gap: 6px; padding: 8px 12px; white-space: nowrap; }
+    .stage { align-items: start; display: grid; gap: 24px; grid-template-columns: minmax(520px, 1fr) minmax(340px, 402px); }
     .talk { border: 1px solid var(--line); border-radius: var(--radius-md); min-height: 780px; padding: 24px; }
-    .talk h2 { font-size: 20px; margin: 0 0 10px; }
+    .talk h2 { font-size: 21px; margin: 0 0 10px; }
     .talk > p { color: var(--muted); line-height: 1.75; margin: 0 0 18px; }
-    .facts { display: grid; gap: 10px; grid-template-columns: repeat(4, minmax(102px, 1fr)); margin: 18px 0 21px; }
-    .fact { background: var(--soft); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 13px 11px; }
+    .facts { display: grid; gap: 10px; grid-template-columns: repeat(4, minmax(104px, 1fr)); margin: 18px 0 20px; }
+    .fact, .panel, .mini { background: var(--soft); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 13px; }
     .fact strong { display: block; font-size: 20px; margin-bottom: 5px; }
-    .fact span { color: var(--muted); font-size: 12px; }
-    .talk-label { color: var(--muted); font-size: 12px; font-weight: 700; margin: 22px 0 10px; }
-    .callouts { display: grid; gap: 10px; }
-    .callout { border: 1px solid var(--line); border-radius: var(--radius-md); display: flex; gap: 12px; padding: 13px 14px; }
-    .number { align-items: center; background: var(--soft); border-radius: 50%; color: var(--action); display: flex; flex: none; font-size: 12px; font-weight: 700; height: 23px; justify-content: center; width: 23px; }
-    .callout strong { display: block; font-size: 14px; margin-bottom: 4px; }
-    .callout span { color: var(--muted); display: block; font-size: 12px; line-height: 1.55; }
+    .fact span, .mini span { color: var(--muted); font-size: 12px; }
+    .grid { display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr); }
+    .wide { grid-column: 1 / -1; }
+    .panel strong, .mini strong { display: block; font-size: 14px; margin-bottom: 5px; }
+    .panel p, .mini p { color: var(--muted); font-size: 12px; line-height: 1.55; margin: 0; }
     .flow { border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; padding-top: 18px; }
     .flow span { background: var(--soft); border-radius: var(--radius-full); color: var(--body); font-size: 12px; padding: 8px 11px; }
     .flow i { align-self: center; color: var(--muted); font-style: normal; }
-    .phone { background: var(--soft); border: 9px solid var(--ink); border-radius: var(--radius-xl); box-shadow: var(--shadow); margin-left: auto; min-height: 790px; overflow: hidden; position: relative; width: min(392px, 100%); }
+    .phone { background: var(--soft); border: 9px solid var(--ink); border-radius: var(--radius-xl); box-shadow: var(--shadow); margin-left: auto; min-height: 790px; overflow: hidden; position: relative; width: min(402px, 100%); }
     .phone-head { display: flex; font-size: 12px; font-weight: 700; height: 42px; justify-content: space-between; padding: 13px 20px 0; }
     .phone-icons { align-items: center; display: flex; gap: 5px; }
     .phone-icons svg { height: 14px; width: 14px; }
     .screen { display: none; min-height: 738px; padding-bottom: 70px; }
     .screen.active { display: block; }
-    .mobile-header { align-items: center; display: flex; height: 54px; justify-content: space-between; padding: 8px 15px; }
+    .mobile-header { align-items: center; display: flex; min-height: 54px; justify-content: space-between; padding: 8px 15px; }
     .mobile-header strong { font-size: 17px; }
-    .icon-button { align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 50%; display: flex; height: 40px; justify-content: center; width: 40px; }
-    .icon-button svg { height: 18px; width: 18px; }
+    .icon-button { align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 50%; display: flex; height: 38px; justify-content: center; width: 38px; }
     .page { padding: 0 13px 16px; }
-    .card, .form-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 13px; }
-    .hero { padding: 15px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 13px; }
     .hero-row { align-items: center; display: flex; gap: 11px; }
-    .avatar { align-items: center; background: var(--soft); border-radius: 50%; display: flex; flex: none; font-size: 16px; font-weight: 700; height: 48px; justify-content: center; width: 48px; }
-    .hero strong { display: block; font-size: 16px; }
-    .micro { color: var(--muted); font-size: 11px; line-height: 1.45; }
-    .verify, .badge { background: var(--soft); border-radius: var(--radius-full); color: var(--body); display: inline-flex; font-size: 11px; gap: 3px; padding: 4px 7px; white-space: nowrap; }
-    .verify { margin-top: 5px; }
+    .avatar { align-items: center; background: var(--soft); border-radius: 50%; display: flex; flex: none; font-size: 16px; font-weight: 800; height: 48px; justify-content: center; width: 48px; }
+    .badge { background: var(--soft); border-radius: var(--radius-full); color: var(--body); display: inline-flex; font-size: 11px; gap: 3px; padding: 4px 7px; white-space: nowrap; }
     .badge.action { background: var(--color-action-disabled); color: var(--action); }
-    .badge.risk { background: var(--color-action-disabled); color: var(--error); }
-    .disclosure, .alert { background: var(--soft); border-radius: var(--radius-sm); color: var(--body); display: flex; font-size: 12px; gap: 7px; line-height: 1.5; margin-top: 12px; padding: 10px; }
-    .disclosure svg, .alert svg { flex: none; height: 16px; margin-top: 2px; width: 16px; }
     .section-row { align-items: center; display: flex; justify-content: space-between; margin: 13px 2px 9px; }
     .section-row strong { font-size: 14px; }
     .section-row span { color: var(--muted); font-size: 12px; }
+    .menu { display: grid; gap: 8px; grid-template-columns: repeat(3, 1fr); }
+    .menu button, .tile { align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); display: flex; flex-direction: column; font-size: 11px; font-weight: 700; gap: 6px; min-height: 74px; padding: 9px; text-align: center; }
+    .menu svg, .tile svg { color: var(--action); height: 20px; width: 20px; }
     .list, .checks { display: grid; gap: 8px; }
-    .item { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 11px; }
-    .item header { align-items: center; display: flex; gap: 6px; justify-content: space-between; margin-bottom: 6px; }
+    .item, .check { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 10px; }
+    .item header { align-items: center; display: flex; justify-content: space-between; margin-bottom: 6px; }
     .item h3 { font-size: 13px; margin: 0; }
-    .item p { color: var(--muted); font-size: 11px; line-height: 1.45; margin: 4px 0; }
-    .menu-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 12px; }
-    .menu-card button { align-items: center; background: var(--soft); border-radius: var(--radius-md); display: flex; flex-direction: column; font-size: 11px; font-weight: 700; gap: 6px; min-height: 72px; padding: 8px; }
-    .menu-card svg { height: 20px; width: 20px; color: var(--action); }
-    .profile-list { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); overflow: hidden; }
-    .profile-list button { align-items: center; border-bottom: 1px solid var(--line); display: flex; gap: 10px; justify-content: space-between; min-height: 50px; padding: 0 12px; width: 100%; }
-    .profile-list button:last-child { border-bottom: 0; }
-    .profile-list span { align-items: center; display: flex; gap: 8px; font-size: 13px; font-weight: 700; }
-    .profile-list svg { height: 18px; width: 18px; color: var(--action); }
-    .pills, .type-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 11px 0; }
-    .pills span, .type-tabs span { background: var(--soft); border: 1px solid var(--line); border-radius: var(--radius-full); color: var(--body); font-size: 11px; padding: 7px 9px; }
-    .pills span.active, .type-tabs span.active { background: var(--action); border-color: var(--action); color: var(--color-on-action); }
+    .item p, .check span, .micro { color: var(--muted); font-size: 11px; line-height: 1.45; margin: 0; }
+    .check { display: flex; gap: 9px; }
+    .check svg { color: var(--action); flex: none; height: 16px; margin-top: 2px; width: 16px; }
+    .check strong { display: block; font-size: 12px; margin-bottom: 3px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; margin: 11px 0; }
+    .pills span { background: var(--soft); border: 1px solid var(--line); border-radius: var(--radius-full); font-size: 11px; padding: 7px 9px; }
+    .pills span.active { background: var(--action); border-color: var(--action); color: var(--on-action); }
     .field { border-bottom: 1px solid var(--line); display: grid; gap: 4px; padding: 9px 0; }
     .field:last-child { border-bottom: 0; }
     .field label { color: var(--muted); font-size: 11px; }
-    .field strong { font-size: 12px; font-weight: 600; line-height: 1.45; }
+    .field strong { font-size: 12px; font-weight: 650; line-height: 1.45; }
     .field-row { display: grid; gap: 8px; grid-template-columns: 1fr 1fr; }
-    .cta { background: var(--action); border-radius: var(--radius-sm); color: var(--color-on-action); display: block; font-size: 14px; font-weight: 700; margin-top: 14px; padding: 12px; text-align: center; width: 100%; }
+    .cta { background: var(--action); border-radius: var(--radius-sm); color: var(--on-action); display: block; font-size: 14px; font-weight: 800; margin-top: 12px; padding: 12px; text-align: center; width: 100%; }
     .secondary { background: var(--soft); color: var(--ink); }
-    .image-hero { background: var(--soft); border-radius: var(--radius-md); height: 142px; overflow: hidden; }
-    .image-hero img { height: 100%; object-fit: cover; width: 100%; }
-    .price-bar { align-items: center; background: var(--color-action-disabled); display: flex; justify-content: space-between; margin: 0 -13px 13px; padding: 10px 13px; }
-    .price-bar strong { font-size: 22px; }
-    .tabs { border-bottom: 1px solid var(--line); display: flex; gap: 22px; margin: 12px 0; }
-    .tabs span { color: var(--muted); font-size: 13px; font-weight: 700; padding-bottom: 9px; }
-    .tabs span.active { border-bottom: 2px solid var(--action); color: var(--ink); }
-    .calc { background: var(--soft); border-radius: var(--radius-sm); margin-top: 12px; padding: 10px; }
-    .calc-row { color: var(--body); display: flex; font-size: 12px; justify-content: space-between; padding: 5px 0; }
-    .calc-row.total { border-top: 1px solid var(--line); color: var(--ink); font-weight: 700; margin-top: 5px; padding-top: 9px; }
-    .summary { background: var(--ink); border-radius: var(--radius-md); color: var(--color-on-action); padding: 15px; }
-    .summary header { display: flex; font-size: 11px; justify-content: space-between; margin-bottom: 15px; }
-    .money { display: grid; gap: 6px; grid-template-columns: repeat(3, 1fr); }
+    .summary { background: var(--ink); border-radius: var(--radius-md); color: var(--on-action); padding: 15px; }
+    .money { display: grid; gap: 6px; grid-template-columns: repeat(3, 1fr); margin-top: 12px; }
     .money strong { display: block; font-size: 17px; }
     .money span { font-size: 10px; }
-    .check { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); display: flex; gap: 9px; padding: 10px; }
-    .check svg { flex: none; height: 16px; margin-top: 2px; width: 16px; color: var(--action); }
-    .check strong { display: block; font-size: 12px; }
-    .check span { color: var(--muted); display: block; font-size: 11px; line-height: 1.42; margin-top: 3px; }
     .bottom-nav { align-items: center; background: var(--surface); border-top: 1px solid var(--line); bottom: 0; display: flex; height: 58px; justify-content: space-around; left: 0; position: absolute; right: 0; }
     .bottom-nav button { align-items: center; color: var(--muted); display: flex; flex-direction: column; font-size: 10px; gap: 3px; }
-    .bottom-nav button.active { color: var(--action); font-weight: 700; }
+    .bottom-nav button.active { color: var(--action); font-weight: 800; }
     .bottom-nav svg { height: 18px; width: 18px; }
-    @media (max-width: 1080px) {
+    @media (max-width: 1120px) {
       .shell { grid-template-columns: 1fr; }
       .side { border-bottom: 1px solid var(--line); border-right: 0; }
       .route { grid-template-columns: repeat(2, 1fr); }
@@ -142,261 +115,351 @@
 <body>
   <div class="shell">
     <aside class="side">
-      <div class="brand"><div class="logo">和</div><div><strong>和趣</strong><span>交易履约闭环同步</span></div></div>
+      <div class="brand"><div class="logo">和</div><div><strong>和趣</strong><span>首次全员产品立项会</span></div></div>
       <div class="label">讲解路径</div>
       <nav class="route">
-        <button class="active" data-screen="overview" data-title="订单服务台驱动的社群交易闭环" data-focus="平台价值从成交后的履约、售后和结算监督开始变得不可替代"><i data-lucide="waypoints"></i><span>产品总览</span></button>
-        <button data-screen="leader" data-title="团长经营工作台" data-focus="收入、报名/订单、核销、社群设置与邀请帮卖集中在经营入口"><i data-lucide="briefcase-business"></i><span>团长端</span></button>
-        <button data-screen="member" data-title="团员履约中心" data-focus="活动、卡券、物流、自提订单按履约类型进入个人中心"><i data-lucide="user-round"></i><span>团员端</span></button>
-        <button data-screen="activity" data-title="创建活动：主验证场景" data-focus="场次、票种、报名信息、保险、退改和核销规则先落地"><i data-lucide="calendar-plus"></i><span>创建活动</span></button>
-        <button data-screen="goods" data-title="创建商品：电商对照验证" data-focus="物流、自提、虚拟权益共用规格、库存、售后和购买信息配置"><i data-lucide="package-plus"></i><span>创建商品</span></button>
-        <button data-screen="detail" data-title="详情与购买须知" data-focus="转化页必须同步披露履约方、退改规则、咨询入口和购买动作"><i data-lucide="scroll-text"></i><span>详情/须知</span></button>
-        <button data-screen="order" data-title="订单详情与待入账" data-focus="订单状态、报名/保险信息、退款入口和收益状态成为结算依据"><i data-lucide="receipt-text"></i><span>订单详情</span></button>
-        <button data-screen="service" data-title="订单服务台与收益监督" data-focus="双客服响应、售后工单、退款回退和结算阻断构成平台护城河"><i data-lucide="headphones"></i><span>服务台</span></button>
+        <button class="active" data-screen="overview" data-title="和趣要做社群团购与本地交易变现平台" data-focus="用商品库、开团发布、分销帮卖、订单履约和售后结算完成社群交易闭环"><i data-lucide="presentation"></i><span>项目总览</span></button>
+        <button data-screen="market" data-title="我们进入的是私域电商、社群团购和本地生活交易交叉赛道" data-focus="市场足够大，但首期只用真实订单验证可切入部分"><i data-lucide="chart-no-axes-combined"></i><span>市场与赛道</span></button>
+        <button data-screen="store" data-title="团长先获得专属社群店铺，再从商品库经营供给" data-focus="同一小程序中生成团长主页、货架、分享入口和订单归因"><i data-lucide="store"></i><span>团长店铺</span></button>
+        <button data-screen="library" data-title="商品库承载活动、实物、自提、卡券和到店服务" data-focus="发布前先明确供给来源、责任方、履约方式和售后规则"><i data-lucide="boxes"></i><span>商品库</span></button>
+        <button data-screen="launch" data-title="发布从长表单改为商品库 + 开团类型" data-focus="参考快团团式一键开团，但用审核和履约规则控制风险"><i data-lucide="rocket"></i><span>发布开团</span></button>
+        <button data-screen="activity" data-title="活动报名是首期最接近现有基础的验证场景" data-focus="亲子、青年、创业活动通过场次、票种、报名、核销和退款闭环"><i data-lucide="calendar-days"></i><span>活动报名</span></button>
+        <button data-screen="groupbuy" data-title="普通团购和预售团购验证电商交易能力" data-focus="普通团购做现货快速成交，预售团购表达先收单后履约"><i data-lucide="shopping-bag"></i><span>普通/预售</span></button>
+        <button data-screen="voucher" data-title="卡券团购连接社群交易与本地核销" data-focus="电子券、次卡和权益包需要清晰有效期、核销和退款规则"><i data-lucide="ticket"></i><span>卡券团购</span></button>
+        <button data-screen="orders" data-title="订单中心按履约类型组织，而不是按活动商品粗分" data-focus="活动、物流、自提、卡券和服务预约共用订单与售后底座"><i data-lucide="receipt-text"></i><span>订单中心</span></button>
+        <button data-screen="distribution" data-title="分销帮卖首发只做一级固定佣金和加价帮卖" data-focus="让团长能赚钱，也让平台能解释每笔收益和退款回退"><i data-lucide="share-2"></i><span>分销帮卖</span></button>
+        <button data-screen="service" data-title="售后服务台让社群交易可被监督" data-focus="咨询、工单、责任协同、退款进度和结算阻断都围绕订单展开"><i data-lucide="headphones"></i><span>售后服务台</span></button>
+        <button data-screen="ledger" data-title="收益账本展示待入账、可结算、冻结和退款冲回" data-focus="真实自动打款前先把钱的状态和规则讲清楚"><i data-lucide="wallet-cards"></i><span>收益账本</span></button>
+        <button data-screen="roadmap" data-title="迭代路线从交易闭环开始，再扩展履约和经营效率" data-focus="V1 做闭环，V2 做预售/服务，V3 做营销效率，V4 做商单扩展"><i data-lucide="milestone"></i><span>迭代路线</span></button>
       </nav>
-      <div class="side-note"><strong>本轮更新口径</strong>商单复杂能力只进扩展池；首发不做多级转单、保证金、会员权限和大群社区，先把每一笔订单服务好。</div>
+      <div class="side-note"><strong>现场讲解原则</strong>这是第一次全员了解项目：先讲赛道和产品是什么，再讲发布、订单、分销、收益和迭代，不展开内部材料来源。</div>
     </aside>
     <main class="main">
       <header class="topbar">
-        <div><h1 id="title">订单服务台驱动的社群交易闭环</h1><p id="focus">平台价值从成交后的履约、售后和结算监督开始变得不可替代</p></div>
-        <div class="tag"><i data-lucide="shield-check"></i> 活动主验证 · 电商对照 · 服务补充</div>
+        <div><h1 id="title">和趣要做社群团购与本地交易变现平台</h1><p id="focus">用商品库、开团发布、分销帮卖、订单履约和售后结算完成社群交易闭环</p></div>
+        <div class="tag"><i data-lucide="badge-check"></i> 商品库 + 开团发布 + 一级帮卖</div>
       </header>
       <section class="stage">
         <article class="talk">
-          <h2>不是只做供给和分销，而是把交易责任约束住</h2>
-          <p>团长和群主通过社群店铺承接交易，但平台真正需要建立的壁垒，是让消费者付款之后，活动能核销、商品能交付、服务能预约、问题有人响应、退款可回退、收益可解释。</p>
-          <div class="facts">
-            <div class="fact"><strong>3</strong><span>受控交易场景</span></div>
-            <div class="fact"><strong>5</strong><span>履约类型</span></div>
-            <div class="fact"><strong>2</strong><span>一级收益模式</span></div>
-            <div class="fact"><strong>1</strong><span>订单服务台</span></div>
+          <h2 id="talk-title">项目不是单点活动工具，而是社群交易操作系统</h2>
+          <p id="talk-copy">和趣服务已经拥有社群触达的人，让他们通过小程序店铺完成活动、团购、卡券和到店服务交易，并把订单履约、售后退款和收益结算沉淀成平台能力。</p>
+          <div class="facts" id="facts">
+            <div class="fact"><strong>3</strong><span>赛道层级</span></div>
+            <div class="fact"><strong>5</strong><span>开团类型</span></div>
+            <div class="fact"><strong>5</strong><span>订单履约</span></div>
+            <div class="fact"><strong>1</strong><span>一级分销</span></div>
           </div>
-          <div class="talk-label">本页要同步的重点</div>
-          <div class="callouts" id="callouts">
-            <div class="callout"><div class="number">1</div><div><strong>主线升级</strong><span>从“建店-货盘-成交”升级为“建店-货盘-成交-订单服务台-履约售后-收益结算”。</span></div></div>
-            <div class="callout"><div class="number">2</div><div><strong>护城河变化</strong><span>新录音里的活动小群不做成大社区，转成围绕订单的双客服和工单闭环。</span></div></div>
-            <div class="callout"><div class="number">3</div><div><strong>商单边界</strong><span>商单讨论只提取一级收益、优惠和退款规则，复杂多级能力不进首发。</span></div></div>
+          <div class="grid" id="panels">
+            <div class="panel wide"><strong>产品主线</strong><p>社群建店 -> 商品库/选品 -> 开团发布 -> 社群分享/分销帮卖 -> 下单支付 -> 履约售后 -> 收益结算。</p></div>
+            <div class="panel"><strong>首期重点</strong><p>活动报名、普通团购、卡券团购，优先验证交易闭环。</p></div>
+            <div class="panel"><strong>暂不做</strong><p>多级分销、保证金、复杂商单、强监管品类和自动打款承诺。</p></div>
           </div>
-          <div class="flow"><span>社群建店</span><i>→</i><span>发布/选卖</span><i>→</i><span>分享成交</span><i>→</i><span>订单服务台</span><i>→</i><span>履约售后</span><i>→</i><span>收益结算</span></div>
+          <div class="flow" id="flow"><span>社群建店</span><i>→</i><span>商品库</span><i>→</i><span>开团发布</span><i>→</i><span>订单履约</span><i>→</i><span>收益结算</span></div>
         </article>
-        <section class="phone" aria-label="社群店铺交易履约原型屏幕">
+
+        <section class="phone" aria-label="和趣产品原型屏幕">
           <div class="phone-head"><span>09:41</span><div class="phone-icons"><i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i></div></div>
 
           <div class="screen active" id="screen-overview">
-            <div class="mobile-header"><strong>社群店铺</strong><button class="icon-button"><i data-lucide="bell"></i></button></div>
+            <div class="mobile-header"><strong>和趣立项总览</strong><button class="icon-button"><i data-lucide="bell"></i></button></div>
             <div class="page">
-              <div class="card hero">
-                <div class="hero-row"><div class="avatar">和</div><div><strong>交易履约闭环</strong><span class="verify"><i data-lucide="badge-check"></i> 首发 MVP</span></div></div>
-                <div class="disclosure"><i data-lucide="info"></i><span>平台先解决每笔订单的履约、售后、退款和结算监督，不先做大群社区。</span></div>
-                <button class="cta jump-leader">查看团长经营入口</button>
-              </div>
-              <div class="section-row"><strong>首发闭环</strong><span>可演示</span></div>
+              <div class="card"><div class="hero-row"><div class="avatar">和</div><div><strong>社群交易操作系统</strong><span class="badge action">首次全员了解</span></div></div></div>
+              <div class="section-row"><strong>一条主线</strong><span>MVP</span></div>
               <div class="checks">
-                <div class="check"><i data-lucide="store"></i><div><strong>社群店铺</strong><span>按主类型匹配主页，团长确认供给后上架。</span></div></div>
-                <div class="check"><i data-lucide="receipt-text"></i><div><strong>订单服务台</strong><span>官方客服、发布方客服和消费者围绕订单处理问题。</span></div></div>
-                <div class="check"><i data-lucide="wallet-cards"></i><div><strong>收益监督</strong><span>固定佣金或加价帮卖，退款后按比例回退。</span></div></div>
+                <div class="check"><i data-lucide="boxes"></i><div><strong>商品库</strong><span>活动、实物、自提、卡券、到店服务统一入库。</span></div></div>
+                <div class="check"><i data-lucide="rocket"></i><div><strong>开团发布</strong><span>普通、预售、卡券、活动、服务五种开团类型。</span></div></div>
+                <div class="check"><i data-lucide="wallet-cards"></i><div><strong>售后结算</strong><span>订单服务台和收益账本解释责任与分钱。</span></div></div>
               </div>
+              <button class="cta jump-launch">查看发布开团</button>
             </div>
-            <div class="bottom-nav"><button class="active"><i data-lucide="house"></i>首页</button><button><i data-lucide="store"></i>店铺</button><button><i data-lucide="message-square"></i>消息</button><button><i data-lucide="user-round"></i>我的</button></div>
+            <div class="bottom-nav"><button class="active"><i data-lucide="house"></i>首页</button><button><i data-lucide="store"></i>店铺</button><button><i data-lucide="user-round"></i>我的</button></div>
           </div>
 
-          <div class="screen" id="screen-leader">
-            <div class="mobile-header"><strong>亲子时光主理人</strong><button class="icon-button"><i data-lucide="repeat-2"></i></button></div>
+          <div class="screen" id="screen-market">
+            <div class="mobile-header"><strong>市场与赛道</strong><button class="icon-button"><i data-lucide="chart-no-axes-combined"></i></button></div>
             <div class="page">
-              <div class="card hero"><div class="hero-row"><div class="avatar">亲</div><div><strong>团长经营工作台</strong><span class="verify">可切换为团员</span></div></div></div>
-              <div class="menu-card">
-                <button class="jump-service"><i data-lucide="wallet"></i>我的收入</button>
-                <button class="jump-order"><i data-lucide="clipboard-list"></i>订单/报名</button>
-                <button><i data-lucide="scan-line"></i>核销管理</button>
-              </div>
-              <div class="section-row"><strong>社群经营</strong><span>首发入口</span></div>
-              <div class="profile-list">
-                <button><span><i data-lucide="message-square"></i>我的社群设置</span><i data-lucide="chevron-right"></i></button>
-                <button><span><i data-lucide="network"></i>邀请他人帮卖</span><i data-lucide="chevron-right"></i></button>
-                <button class="jump-service"><span><i data-lucide="headphones"></i>联系官方客服</span><i data-lucide="chevron-right"></i></button>
-                <button><span><i data-lucide="settings"></i>设置</span><i data-lucide="chevron-right"></i></button>
+              <div class="summary"><strong>TAM / SAM / SOM</strong><div class="money"><div><strong>3万亿+</strong><span>私域电商预期</span></div><div><strong>9.50亿</strong><span>小程序流量</span></div><div><strong>10.9万亿</strong><span>线上本地服务</span></div></div></div>
+              <div class="section-row"><strong>和趣切入</strong><span>保守口径</span></div>
+              <div class="checks">
+                <div class="check"><i data-lucide="circle-dot"></i><div><strong>TAM</strong><span>私域电商和本地生活大盘，不等同可获得收入。</span></div></div>
+                <div class="check"><i data-lucide="circle-dot"></i><div><strong>SAM</strong><span>微信小程序、社群团购、卡券和本地活动服务交易。</span></div></div>
+                <div class="check"><i data-lucide="circle-dot"></i><div><strong>SOM</strong><span>首期可触达城市、团长、供给和真实订单。</span></div></div>
               </div>
             </div>
-            <div class="bottom-nav"><button><i data-lucide="house"></i>首页</button><button><i data-lucide="message-square"></i>消息</button><button class="active"><i data-lucide="users-round"></i>社群</button></div>
           </div>
 
-          <div class="screen" id="screen-member">
-            <div class="mobile-header"><strong>用户微信昵称</strong><button class="icon-button"><i data-lucide="repeat-2"></i></button></div>
+          <div class="screen" id="screen-store">
+            <div class="mobile-header"><strong>亲子时光社群店</strong><button class="icon-button"><i data-lucide="repeat-2"></i></button></div>
             <div class="page">
-              <div class="card hero"><div class="hero-row"><div class="avatar">用</div><div><strong>团员履约中心</strong><span class="verify">可切换为团长</span></div></div></div>
-              <div class="section-row"><strong>我的订单</strong><span>按履约类型</span></div>
-              <div class="menu-card">
-                <button class="jump-order"><i data-lucide="flag"></i>活动订单</button>
-                <button class="jump-detail"><i data-lucide="ticket"></i>卡券订单</button>
-                <button><i data-lucide="truck"></i>物流订单</button>
-                <button><i data-lucide="shopping-bag"></i>自提订单</button>
-                <button><i data-lucide="clock"></i>浏览历史</button>
-                <button><i data-lucide="settings"></i>设置</button>
+              <div class="card"><div class="hero-row"><div class="avatar">亲</div><div><strong>亲子时光主理人</strong><span class="badge">亲子 · 周末活动 · 卡券</span></div></div></div>
+              <div class="section-row"><strong>店铺货架</strong><span>按社群类型</span></div>
+              <div class="menu">
+                <button class="jump-activity"><i data-lucide="calendar-days"></i>活动报名</button>
+                <button class="jump-groupbuy"><i data-lucide="shopping-bag"></i>团购商品</button>
+                <button class="jump-voucher"><i data-lucide="ticket"></i>卡券权益</button>
               </div>
-              <div class="disclosure"><i data-lucide="info"></i><span>团员再次进入已购买项目时，应优先看到订单状态和售后入口，而不是重新回到普通详情页。</span></div>
+              <div class="section-row"><strong>经营入口</strong><span>团长端</span></div>
+              <div class="menu">
+                <button class="jump-library"><i data-lucide="boxes"></i>商品库</button>
+                <button class="jump-orders"><i data-lucide="receipt-text"></i>订单</button>
+                <button class="jump-ledger"><i data-lucide="wallet"></i>收益</button>
+              </div>
             </div>
-            <div class="bottom-nav"><button><i data-lucide="house"></i>首页</button><button><i data-lucide="message-square"></i>消息</button><button class="active"><i data-lucide="user-round"></i>我的</button></div>
+          </div>
+
+          <div class="screen" id="screen-library">
+            <div class="mobile-header"><strong>商品库 / 供给库</strong><button class="icon-button"><i data-lucide="plus"></i></button></div>
+            <div class="page">
+              <div class="pills"><span class="active">全部</span><span>活动</span><span>实物</span><span>自提</span><span>卡券</span><span>服务</span></div>
+              <div class="list">
+                <div class="item"><header><h3>亲子陶艺体验</h3><span class="badge action">活动票务</span></header><p>2 个场次 · 3 个票种 · 允许固定佣金帮卖</p></div>
+                <div class="item"><header><h3>儿童游泳体验次卡</h3><span class="badge action">虚拟卡券</span></header><p>5 次卡 · 有效期 90 天 · 到店核销</p></div>
+                <div class="item"><header><h3>社区绘本礼包</h3><span class="badge">自提商品</span></header><p>库存 80 · 支持自提码 · 未提可退</p></div>
+                <div class="item"><header><h3>亲子摄影体验</h3><span class="badge">到店服务</span></header><p>预约时段 · 到店核销 · 投诉工单</p></div>
+              </div>
+              <button class="cta jump-launch">选择供给去开团</button>
+            </div>
+          </div>
+
+          <div class="screen" id="screen-launch">
+            <div class="mobile-header"><strong>发布开团</strong><button class="icon-button"><i data-lucide="ellipsis"></i></button></div>
+            <div class="page">
+              <div class="menu">
+                <button class="jump-library"><i data-lucide="boxes"></i>从商品库选</button>
+                <button><i data-lucide="file-plus-2"></i>新建供给</button>
+                <button><i data-lucide="eye"></i>预览页面</button>
+              </div>
+              <div class="section-row"><strong>选择开团类型</strong><span>一页配置</span></div>
+              <div class="list">
+                <div class="item"><header><h3>普通团购</h3><span class="badge action">现货/标准</span></header><p>标题、图片、价格、库存、售卖时间、售后规则。</p></div>
+                <div class="item"><header><h3>预售团购</h3><span class="badge">先收单</span></header><p>预售截止、预计履约、取消退款说明。</p></div>
+                <div class="item"><header><h3>卡券团购 / 活动报名 / 到店服务</h3><span class="badge">按类型展开</span></header><p>券码、场次票种、预约时段等差异字段自动展开。</p></div>
+              </div>
+              <button class="cta jump-orders">发布并查看订单</button>
+            </div>
           </div>
 
           <div class="screen" id="screen-activity">
-            <div class="mobile-header"><button class="icon-button"><i data-lucide="chevron-left"></i></button><strong>创建组团活动</strong><button class="icon-button"><i data-lucide="ellipsis"></i></button></div>
+            <div class="mobile-header"><strong>活动报名</strong><button class="icon-button"><i data-lucide="calendar-plus"></i></button></div>
             <div class="page">
-              <div class="form-card">
-                <div class="field"><label>活动名称</label><strong>周末亲子陶艺体验</strong></div>
-                <div class="field"><label>活动描述与封面</label><strong>说明行程安排、准备物品、注意事项；默认首张图为封面。</strong></div>
-                <div class="field-row">
-                  <div class="field"><label>活动地点</label><strong>静安区创意园</strong></div>
-                  <div class="field"><label>核销方式</label><strong>验码核销</strong></div>
-                </div>
-                <div class="field"><label>场次设置</label><strong>01/23 10:00-12:00；报名截止 01/22 18:00；退款规则独立配置。</strong></div>
-                <div class="field"><label>票种/分组</label><strong>亲子套票 ¥198 · 20 份 · 需填写昵称/手机号/车牌。</strong></div>
-                <div class="field"><label>保险选择</label><strong>儿童活动可选保险；保险信息仅用于履约，不用于营销画像。</strong></div>
-                <button class="cta jump-detail">发布团活动</button>
+              <div class="card">
+                <div class="field"><label>活动</label><strong>亲子陶艺创意工坊</strong></div>
+                <div class="field-row"><div class="field"><label>场次</label><strong>01/23 10:00</strong></div><div class="field"><label>名额</label><strong>20 组</strong></div></div>
+                <div class="field"><label>票种</label><strong>亲子套票 ¥198 · 儿童单人 ¥128 · 陪同 ¥39</strong></div>
+                <div class="field"><label>购买须知</label><strong>报名信息、保险、集合地点和退改比例结构化展示。</strong></div>
               </div>
+              <button class="cta jump-orders">立即报名</button>
             </div>
-            <div class="bottom-nav"><button class="secondary"><i data-lucide="file-pen-line"></i>存草稿</button><button class="active"><i data-lucide="send"></i>发布</button></div>
           </div>
 
-          <div class="screen" id="screen-goods">
-            <div class="mobile-header"><button class="icon-button"><i data-lucide="chevron-left"></i></button><strong>创建商品</strong><button class="icon-button"><i data-lucide="ellipsis"></i></button></div>
+          <div class="screen" id="screen-groupbuy">
+            <div class="mobile-header"><strong>普通/预售团购</strong><button class="icon-button"><i data-lucide="shopping-bag"></i></button></div>
             <div class="page">
-              <div class="form-card">
-                <div class="field"><label>商品名称</label><strong>儿童游泳体验次卡</strong></div>
-                <div class="field"><label>商品详情与图片</label><strong>说明权益内容、适用门店、有效期和使用限制。</strong></div>
-                <div class="field-row">
-                  <div class="field"><label>售卖方式</label><strong>虚拟权益</strong></div>
-                  <div class="field"><label>售后规则</label><strong>未使用随时退</strong></div>
-                </div>
-                <div class="field"><label>规格设置</label><strong>单次体验 ¥109 · 库存 80 · 限购 2 份。</strong></div>
-                <div class="field"><label>购买需填信息</label><strong>手机号、预约门店、儿童年龄段。</strong></div>
-                <div class="disclosure"><i data-lucide="package-check"></i><span>同一商品模型还需支持物流、自提和虚拟权益，不另建三套交易系统。</span></div>
-                <button class="cta jump-detail">发布团购商品</button>
+              <div class="list">
+                <div class="item"><header><h3>普通团购：绘本礼包</h3><span class="badge action">现货</span></header><p>库存 80 · 自提/物流 · 发货前随时退。</p></div>
+                <div class="item"><header><h3>预售团购：亲子露营包</h3><span class="badge">预售</span></header><p>05/30 截止 · 预计 06/06 发货 · 不做复杂成团门槛。</p></div>
+              </div>
+              <div class="section-row"><strong>发布配置</strong><span>差异字段</span></div>
+              <div class="checks">
+                <div class="check"><i data-lucide="package"></i><div><strong>普通团购</strong><span>价格、库存、物流/自提、售后规则。</span></div></div>
+                <div class="check"><i data-lucide="timer"></i><div><strong>预售团购</strong><span>预售截止、预计履约时间、取消规则。</span></div></div>
               </div>
             </div>
-            <div class="bottom-nav"><button class="secondary"><i data-lucide="file-pen-line"></i>存草稿</button><button class="active"><i data-lucide="send"></i>发布</button></div>
           </div>
 
-          <div class="screen" id="screen-detail">
-            <div class="mobile-header"><span class="badge action">团长首页</span><button class="icon-button"><i data-lucide="share-2"></i></button></div>
+          <div class="screen" id="screen-voucher">
+            <div class="mobile-header"><strong>卡券团购</strong><button class="icon-button"><i data-lucide="ticket"></i></button></div>
             <div class="page">
-              <div class="image-hero"><img src="./assets/pottery.jpg" alt="活动图"></div>
-              <div class="price-bar"><strong>¥198 起</strong><span class="micro">报名截止 2026/01/30 15:30</span></div>
-              <h3>【匠心手作】亲子陶艺创意工坊</h3>
               <div class="card">
-                <div class="field"><label>地点</label><strong>静安区创意园区陶艺工作室</strong></div>
-                <div class="field"><label>场次</label><strong>01/23 10:00-12:00；01/24 10:00-12:00</strong></div>
-                <div class="field"><label>社群来源</label><strong>亲子时光主理人推荐</strong></div>
+                <div class="field"><label>卡券</label><strong>儿童游泳体验 5 次卡</strong></div>
+                <div class="field-row"><div class="field"><label>价格</label><strong>¥399</strong></div><div class="field"><label>有效期</label><strong>90 天</strong></div></div>
+                <div class="field"><label>核销</label><strong>到店扫码核销，可查看剩余次数。</strong></div>
+                <div class="field"><label>售后</label><strong>未使用可退；部分使用按规则退。</strong></div>
               </div>
-              <div class="tabs"><span class="active">活动详情</span><span>购买须知</span></div>
-              <div class="disclosure"><i data-lucide="bell"></i><span>购买须知中展示每个场次的退款比例、报名信息和保险说明。</span></div>
-              <button class="cta jump-order">立即报名</button>
+              <button class="cta jump-service">查看售后路径</button>
             </div>
-            <div class="bottom-nav"><button><i data-lucide="message-circle"></i>咨询</button><button class="active"><i data-lucide="send"></i>报名</button></div>
           </div>
 
-          <div class="screen" id="screen-order">
-            <div class="mobile-header"><button class="icon-button"><i data-lucide="chevron-left"></i></button><strong>订单详情</strong><button class="icon-button"><i data-lucide="copy"></i></button></div>
+          <div class="screen" id="screen-orders">
+            <div class="mobile-header"><strong>订单中心</strong><button class="icon-button"><i data-lucide="search"></i></button></div>
             <div class="page">
-              <div class="card hero"><strong>已支付</strong><span class="micro">待入账 · 结算前售后需闭环</span></div>
-              <div class="card">
-                <div class="field-row">
-                  <div class="field"><label>订单编号</label><strong>2023101598422031</strong></div>
-                  <div class="field"><label>付款方式</label><strong>微信小程序支付</strong></div>
-                </div>
-                <div class="field-row">
-                  <div class="field"><label>商品总价</label><strong>¥25.6</strong></div>
-                  <div class="field"><label>优惠金额</label><strong>¥0</strong></div>
-                </div>
-                <div class="field"><label>实收金额</label><strong>¥25.6</strong></div>
+              <div class="menu">
+                <button><i data-lucide="flag"></i>活动报名订单</button>
+                <button><i data-lucide="truck"></i>物流订单</button>
+                <button><i data-lucide="shopping-bag"></i>自提订单</button>
+                <button><i data-lucide="ticket"></i>卡券核销订单</button>
+                <button><i data-lucide="calendar-clock"></i>服务预约订单</button>
+                <button class="jump-service"><i data-lucide="headphones"></i>售后</button>
               </div>
-              <div class="section-row"><strong>报名信息</strong><span>2 人</span></div>
-              <div class="card">
-                <div class="field"><label>昵称 / 手机号 / 车牌</label><strong>金花花 · 13561960231 · 鲁B2U1R3</strong></div>
-                <div class="field"><label>保险信息</label><strong>王小明 · 4401**********1234</strong></div>
-              </div>
-              <button class="cta secondary jump-service">退款 / 售后</button>
+              <div class="section-row"><strong>最新订单</strong><span>待入账</span></div>
+              <div class="item"><header><h3>亲子陶艺体验 x2</h3><span class="badge action">已支付</span></header><p>来源：亲子时光社群 · 推广方：莉莉妈妈 · 可退款。</p></div>
             </div>
-            <div class="bottom-nav"><button><i data-lucide="message-circle"></i>咨询</button><button class="active"><i data-lucide="undo-2"></i>退款</button></div>
+          </div>
+
+          <div class="screen" id="screen-distribution">
+            <div class="mobile-header"><strong>分销帮卖</strong><button class="icon-button"><i data-lucide="share-2"></i></button></div>
+            <div class="page">
+              <div class="list">
+                <div class="item"><header><h3>固定佣金分享赚</h3><span class="badge action">一级</span></header><p>消费者价格一致；发布方设置每单 ¥20 推广佣金。</p></div>
+                <div class="item"><header><h3>加价帮卖</h3><span class="badge">一级</span></header><p>发布方底价 ¥128；推广团长终端售价 ¥158；价差扣除平台费后入账。</p></div>
+              </div>
+              <div class="checks">
+                <div class="check"><i data-lucide="ban"></i><div><strong>不做多级</strong><span>一单只有一个直接推广团长。</span></div></div>
+                <div class="check"><i data-lucide="undo-2"></i><div><strong>退款回退</strong><span>全额退款全链取消，部分退款按比例冲回。</span></div></div>
+              </div>
+            </div>
           </div>
 
           <div class="screen" id="screen-service">
-            <div class="mobile-header"><strong>订单服务台</strong><button class="icon-button"><i data-lucide="headphones"></i></button></div>
+            <div class="mobile-header"><strong>售后服务台</strong><button class="icon-button"><i data-lucide="headphones"></i></button></div>
             <div class="page">
-              <div class="summary">
-                <header><span>订单 2023101598422031</span><span>处理中</span></header>
-                <div class="money"><div><strong>2</strong><span>责任方</span></div><div><strong>1</strong><span>售后工单</span></div><div><strong>待入账</strong><span>结算状态</span></div></div>
-              </div>
-              <div class="section-row"><strong>响应机制</strong><span>双客服</span></div>
+              <div class="summary"><strong>订单 2023101598422031</strong><div class="money"><div><strong>2</strong><span>责任方</span></div><div><strong>1</strong><span>工单</span></div><div><strong>冻结</strong><span>收益状态</span></div></div></div>
+              <div class="section-row"><strong>处理链路</strong><span>围绕订单</span></div>
               <div class="checks">
-                <div class="check"><i data-lucide="headphones"></i><div><strong>官方客服</strong><span>接收消费者问题，监督处理进度，必要时阻断结算。</span></div></div>
-                <div class="check"><i data-lucide="store"></i><div><strong>发布方客服</strong><span>处理活动安排、核销、发货或到店服务细节。</span></div></div>
-                <div class="check"><i data-lucide="wallet-cards"></i><div><strong>收益账本</strong><span>全额退款全链取消；部分退款按比例冲回平台费、发布收益和推广收益。</span></div></div>
+                <div class="check"><i data-lucide="headphones"></i><div><strong>平台客服</strong><span>接收问题、监督进度、必要时阻断结算。</span></div></div>
+                <div class="check"><i data-lucide="store"></i><div><strong>发布方</strong><span>处理履约、核销、发货或服务细节。</span></div></div>
+                <div class="check"><i data-lucide="receipt-text"></i><div><strong>退款工单</strong><span>记录原因、材料、责任方和处理结论。</span></div></div>
               </div>
-              <div class="alert"><i data-lucide="ban"></i><span>不做多级转单、保证金账户和会员权限；这些只进入后续商单系统扩展池。</span></div>
             </div>
-            <div class="bottom-nav"><button><i data-lucide="receipt-text"></i>订单</button><button class="active"><i data-lucide="headphones"></i>服务台</button><button><i data-lucide="wallet"></i>收益</button></div>
+          </div>
+
+          <div class="screen" id="screen-ledger">
+            <div class="mobile-header"><strong>收益账本</strong><button class="icon-button"><i data-lucide="wallet-cards"></i></button></div>
+            <div class="page">
+              <div class="summary"><strong>本周收益</strong><div class="money"><div><strong>¥1,286</strong><span>待入账</span></div><div><strong>¥826</strong><span>可结算</span></div><div><strong>¥198</strong><span>售后冻结</span></div></div></div>
+              <div class="section-row"><strong>账本明细</strong><span>退款可追溯</span></div>
+              <div class="list">
+                <div class="item"><header><h3>活动订单推广佣金</h3><span class="badge action">待入账</span></header><p>售后期结束后转为可结算。</p></div>
+                <div class="item"><header><h3>卡券订单部分退款</h3><span class="badge">冲回</span></header><p>按退款比例冲回平台费、发布收益和推广收益。</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="screen" id="screen-roadmap">
+            <div class="mobile-header"><strong>迭代路线</strong><button class="icon-button"><i data-lucide="milestone"></i></button></div>
+            <div class="page">
+              <div class="list">
+                <div class="item"><header><h3>V1 交易闭环</h3><span class="badge action">首期</span></header><p>社群店铺、商品库、开团、订单、售后、收益。</p></div>
+                <div class="item"><header><h3>V2 履约扩展</h3><span class="badge">第二期</span></header><p>预售、自提、卡券、服务预约、风险暂停。</p></div>
+                <div class="item"><header><h3>V3 经营效率</h3><span class="badge">第三期</span></header><p>素材库、优惠策略、复购触达、AI 文案草稿、群接龙。</p></div>
+                <div class="item"><header><h3>V4 商单扩展</h3><span class="badge">后续</span></header><p>会员经营、商单系统加强、更多品类。</p></div>
+              </div>
+            </div>
           </div>
         </section>
       </section>
     </main>
   </div>
   <script>
-    const notes = {
-      overview: [
-        ["主线升级", "从“建店-货盘-成交”升级为“建店-货盘-成交-订单服务台-履约售后-收益结算”。"],
-        ["护城河变化", "新录音里的活动小群不做成大社区，转成围绕订单的双客服和工单闭环。"],
-        ["商单边界", "商单讨论只提取一级收益、优惠和退款规则，复杂多级能力不进首发。"]
-      ],
-      leader: [
-        ["团长端不是后台大全", "首发只放收入、订单/报名、核销、社群设置、邀请帮卖和客服入口。"],
-        ["邀请帮卖保留", "保留一级帮卖入口，但不出现下级、经销商和层层转单。"],
-        ["经营视角清晰", "团长看到的是今天要处理的订单、核销、客服和收益。"]
-      ],
-      member: [
-        ["团员端按履约分单", "活动、卡券、物流、自提拆开，方便用户找订单和售后。"],
-        ["已购买后看状态", "用户再次进入项目，应看到待使用、退款、客服，而不是重新被销售。"],
-        ["消费者体验影响信任", "订单履约体验是平台品牌力的一部分。"]
-      ],
-      activity: [
-        ["活动仍是主验证", "场次、票种、报名信息、保险、退改和核销最接近现有业务基础。"],
-        ["购买须知要结构化", "每个场次可有不同退款规则，避免售后解释成本失控。"],
-        ["保险信息受限使用", "只用于履约和保障，不进入推广画像。"]
-      ],
-      goods: [
-        ["电商做对照验证", "物流、自提、虚拟权益共用商品发布和订单底座。"],
-        ["先控品类风险", "食品生鲜、美容医疗、责任不清品类不首发。"],
-        ["售后规则前置", "售卖方式、售后规则和购买需填信息发布时必须确定。"]
-      ],
-      detail: [
-        ["详情页要成交也要披露", "价格、倒计时、履约方、社群来源和咨询入口必须清楚。"],
-        ["购买须知不是附录", "退改比例、报名资料、保险和核销规则直接影响退款争议。"],
-        ["咨询入口前置", "用户购买前和购买后都能进入服务响应链路。"]
-      ],
-      order: [
-        ["订单详情是售后依据", "支付状态、待入账、金额、报名/保险信息和退款入口必须集中。"],
-        ["待入账有业务含义", "售后未闭环前，相关收益不应被当成可自由结算。"],
-        ["退款入口可见", "平台要把退款处理纳入规则，而不是让用户绕回私聊。"]
-      ],
-      service: [
-        ["服务台替代大群", "围绕订单组织官方客服和发布方客服，解决问题而不是制造社区内容。"],
-        ["结算可被阻断", "售后未解决时，平台可以阻断或延后相关收益结算。"],
-        ["复杂商单后置", "保证金、会员权限和多级转单只进入扩展池，不进入首发承诺。"]
-      ]
+    const content = {
+      overview: {
+        h: "项目不是单点活动工具，而是社群交易操作系统",
+        p: "和趣服务已经拥有社群触达的人，让他们通过小程序店铺完成活动、团购、卡券和到店服务交易，并把订单履约、售后退款和收益结算沉淀成平台能力。",
+        facts: [["3", "赛道层级"], ["5", "开团类型"], ["5", "订单履约"], ["1", "一级分销"]],
+        panels: [["产品主线", "社群建店 -> 商品库/选品 -> 开团发布 -> 社群分享/分销帮卖 -> 下单支付 -> 履约售后 -> 收益结算。"], ["首期重点", "活动报名、普通团购、卡券团购，优先验证交易闭环。"], ["暂不做", "多级分销、保证金、复杂商单、强监管品类和自动打款承诺。"]]
+      },
+      market: {
+        h: "市场足够大，但和趣要先证明可切入部分",
+        p: "TAM 看私域电商和本地服务大盘，SAM 看微信小程序和社群交易，SOM 看首期可触达团长、供给和真实订单。",
+        facts: [["3万亿+", "私域电商预期"], ["9.50亿", "小程序流量"], ["10.9万亿", "线上本地服务"], ["SOM", "真实订单测算"]],
+        panels: [["TAM", "私域电商和本地生活交易大盘，证明方向值得进入。"], ["SAM", "微信小程序、社群团购、卡券核销和本地活动服务交易。"], ["SOM", "首期可触达城市、团长和供给，用真实订单逐步测算。"]]
+      },
+      store: {
+        h: "同一小程序承载所有团长的专属社群店铺",
+        p: "团长选择社群类型和兴趣标签后生成主页，货架从商品库中选择，消费者从团长主页、单品、优惠券或分享链接进入。",
+        facts: [["1", "同一小程序"], ["N", "团长主页"], ["3", "货架入口"], ["1", "直接归因"]],
+        panels: [["店铺模板", "社群类型决定首页模块和推荐货架顺序。"], ["经营入口", "商品库、开团、订单、售后和收益放在团长端。"], ["消费者入口", "活动、团购、卡券和服务按履约类型进入。"]]
+      },
+      library: {
+        h: "商品库先约束供给，再允许团长开团",
+        p: "商品库不是只放商品，而是放所有可交易供给：活动票务、实物商品、自提商品、虚拟卡券和到店服务。",
+        facts: [["5", "供给类型"], ["3", "供给来源"], ["审核", "上线前"], ["白名单", "低风险"]],
+        panels: [["供给来源", "自有供给、平台审核货盘、允许帮卖供给。"], ["入库规则", "先明确责任方、履约、售后、推广模式，再允许发布。"], ["风险控制", "未审核供给不得直接分享成交。"]]
+      },
+      launch: {
+        h: "发布功能改为商品库 + 开团类型",
+        p: "参考快团团的商品库和开团模式，但不照搬全品类自由开放；和趣按普通团购、预售团购、卡券团购、活动报名和到店服务展开差异配置。",
+        facts: [["5", "开团类型"], ["1页", "集中配置"], ["预览", "发布前"], ["审核", "必要时"]],
+        panels: [["发布入口", "从商品库选择或新建供给入库。"], ["配置方式", "一页展示关键配置，按类型展开差异字段。"], ["发布结果", "生成团购页、活动页或卡券页，并记录来源归因。"]]
+      },
+      activity: {
+        h: "活动报名是首期主验证场景",
+        p: "活动最接近现有业务基础，适合先验证社群触达到报名、核销、退款和复购的完整闭环。",
+        facts: [["亲子", "现有基础"], ["青年", "兴趣活动"], ["创业", "交流活动"], ["核销", "核心履约"]],
+        panels: [["发布字段", "场次、票种、报名信息、保险和退改规则。"], ["消费者体验", "详情页同步展示购买须知和咨询入口。"], ["运营重点", "控制高风险户外、多日行程和强效果承诺。"]]
+      },
+      groupbuy: {
+        h: "普通团购和预售团购验证商品交易能力",
+        p: "普通团购用于现货和标准供给，预售团购用于先收单再备货或排期；首期不做复杂成团门槛和资金监管承诺。",
+        facts: [["普通", "现货成交"], ["预售", "先收单"], ["物流", "发货"], ["自提", "核销"]],
+        panels: [["普通团购", "价格、库存、物流/自提、售后规则。"], ["预售团购", "预售截止、预计履约、取消退款说明。"], ["边界", "不开放食品生鲜和责任不清品类。"]]
+      },
+      voucher: {
+        h: "卡券团购是本地履约的轻量入口",
+        p: "电子券、次卡和权益包适合社群促销，但必须前置有效期、核销方式、退款和过期规则。",
+        facts: [["券码", "支付后发放"], ["次卡", "剩余次数"], ["核销", "到店/扫码"], ["退款", "按规则"]],
+        panels: [["适用供给", "体验券、次卡、权益包、门店优惠券。"], ["消费者状态", "待使用、部分使用、已用完、已过期。"], ["售后重点", "未使用可退、部分使用按规则退。"]]
+      },
+      orders: {
+        h: "订单中心按履约类型组织",
+        p: "活动、物流、自提、卡券、服务预约共用订单和售后底座，避免为每个场景拆出一套交易系统。",
+        facts: [["5", "订单类型"], ["统一", "订单详情"], ["统一", "售后入口"], ["统一", "账本"]],
+        panels: [["订单入口", "活动报名订单、物流订单、自提订单、卡券核销订单、服务预约订单。"], ["订单详情", "支付、履约、来源、优惠、退款和收益状态。"], ["业务价值", "团长和消费者都能快速找到当前状态。"]]
+      },
+      distribution: {
+        h: "分销帮卖首发坚持一级",
+        p: "保留固定佣金分享赚和加价帮卖两种模式，让团长有动力分享，也让平台能解释每一笔钱。",
+        facts: [["固定佣金", "价格一致"], ["加价帮卖", "底价+价差"], ["1", "直接推广"], ["退款", "按比例冲回"]],
+        panels: [["固定佣金", "发布方设置佣金，成交后推广团长获得固定收益。"], ["加价帮卖", "发布方设置底价，推广团长设置终端售价。"], ["不做", "二级返佣、发展下级、层层转单。"]]
+      },
+      service: {
+        h: "售后服务台是平台护城河",
+        p: "社群交易不能只在群里解释，必须把咨询、工单、责任方、退款和结算阻断放到订单服务台里。",
+        facts: [["咨询", "购买前后"], ["工单", "退款投诉"], ["协同", "责任方"], ["阻断", "结算"]],
+        panels: [["平台客服", "接收问题、监督进度、必要时阻断结算。"], ["发布方", "处理履约、发货、核销和服务细节。"], ["退款工单", "记录原因、材料、进度和处理结论。"]]
+      },
+      ledger: {
+        h: "收益账本先讲清钱的状态，再谈自动打款",
+        p: "真实自动结算上线前，产品先展示待入账、可结算、已结算、售后冻结和退款冲回，避免收益不可解释。",
+        facts: [["待入账", "售后期"], ["可结算", "可提现"], ["冻结", "工单中"], ["冲回", "退款后"]],
+        panels: [["平台费", "按消费者实付金额计提。"], ["发布方收益", "自售金额或供给结算底价。"], ["推广收益", "固定佣金或加价收益，退款按比例冲回。"]]
+      },
+      roadmap: {
+        h: "迭代从交易闭环开始，再扩展履约和经营效率",
+        p: "先把社群店铺、商品库、开团、订单、售后和收益跑通，再做预售/服务、营销效率和商单扩展。",
+        facts: [["V1", "交易闭环"], ["V2", "履约扩展"], ["V3", "经营效率"], ["V4", "商单扩展"]],
+        panels: [["V1", "活动报名、普通团购、卡券团购。"], ["V2", "预售、自提、到店服务、风险暂停。"], ["V3/V4", "素材库、AI 文案草稿、群接龙、会员和商单系统。"]]
+      }
     };
+    function renderTalk(name) {
+      const data = content[name];
+      document.getElementById("talk-title").textContent = data.h;
+      document.getElementById("talk-copy").textContent = data.p;
+      document.getElementById("facts").innerHTML = data.facts.map((f) => `<div class="fact"><strong>${f[0]}</strong><span>${f[1]}</span></div>`).join("");
+      document.getElementById("panels").innerHTML = data.panels.map((p, i) => `<div class="panel ${i === 0 ? "wide" : ""}"><strong>${p[0]}</strong><p>${p[1]}</p></div>`).join("");
+      document.getElementById("flow").innerHTML = "<span>社群建店</span><i>→</i><span>商品库</span><i>→</i><span>开团发布</span><i>→</i><span>订单履约</span><i>→</i><span>收益结算</span>";
+    }
     function openScreen(name, title, focus) {
       document.querySelectorAll(".screen").forEach((screen) => screen.classList.toggle("active", screen.id === `screen-${name}`));
       document.querySelectorAll(".route button").forEach((button) => button.classList.toggle("active", button.dataset.screen === name));
       document.getElementById("title").textContent = title;
       document.getElementById("focus").textContent = focus;
-      document.getElementById("callouts").innerHTML = notes[name].map((note, index) =>
-        `<div class="callout"><div class="number">${index + 1}</div><div><strong>${note[0]}</strong><span>${note[1]}</span></div></div>`
-      ).join("");
+      renderTalk(name);
     }
     document.querySelectorAll(".route button").forEach((button) => button.addEventListener("click", () => openScreen(button.dataset.screen, button.dataset.title, button.dataset.focus)));
-    document.querySelectorAll(".jump-leader").forEach((button) => button.addEventListener("click", () => openScreen("leader", "团长经营工作台", "收入、报名/订单、核销、社群设置与邀请帮卖集中在经营入口")));
-    document.querySelectorAll(".jump-order").forEach((button) => button.addEventListener("click", () => openScreen("order", "订单详情与待入账", "订单状态、报名/保险信息、退款入口和收益状态成为结算依据")));
-    document.querySelectorAll(".jump-detail").forEach((button) => button.addEventListener("click", () => openScreen("detail", "详情与购买须知", "转化页必须同步披露履约方、退改规则、咨询入口和购买动作")));
-    document.querySelectorAll(".jump-service").forEach((button) => button.addEventListener("click", () => openScreen("service", "订单服务台与收益监督", "双客服响应、售后工单、退款回退和结算阻断构成平台护城河")));
+    const jumps = {
+      "jump-launch": ["launch", "发布从长表单改为商品库 + 开团类型", "参考快团团式一键开团，但用审核和履约规则控制风险"],
+      "jump-library": ["library", "商品库承载活动、实物、自提、卡券和到店服务", "发布前先明确供给来源、责任方、履约方式和售后规则"],
+      "jump-orders": ["orders", "订单中心按履约类型组织，而不是按活动商品粗分", "活动、物流、自提、卡券和服务预约共用订单与售后底座"],
+      "jump-ledger": ["ledger", "收益账本展示待入账、可结算、冻结和退款冲回", "真实自动打款前先把钱的状态和规则讲清楚"],
+      "jump-service": ["service", "售后服务台让社群交易可被监督", "咨询、工单、责任协同、退款进度和结算阻断都围绕订单展开"],
+      "jump-activity": ["activity", "活动报名是首期最接近现有基础的验证场景", "亲子、青年、创业活动通过场次、票种、报名、核销和退款闭环"],
+      "jump-groupbuy": ["groupbuy", "普通团购和预售团购验证电商交易能力", "普通团购做现货快速成交，预售团购表达先收单后履约"],
+      "jump-voucher": ["voucher", "卡券团购连接社群交易与本地核销", "电子券、次卡和权益包需要清晰有效期、核销和退款规则"]
+    };
+    Object.entries(jumps).forEach(([klass, target]) => {
+      document.querySelectorAll(`.${klass}`).forEach((button) => button.addEventListener("click", () => openScreen(target[0], target[1], target[2])));
+    });
     lucide.createIcons();
   </script>
 </body>
