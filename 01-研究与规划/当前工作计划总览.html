@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>和趣当前工作计划总览</title>
+  <link rel="stylesheet" href="../design-system/airbnb-tokens.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font-family-sans);
+      color: var(--color-ink);
+      background: linear-gradient(180deg, #fff 0%, var(--color-surface-soft) 100%);
+    }
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 48px 28px 72px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 28px;
+      align-items: stretch;
+      margin-bottom: 28px;
+    }
+    .panel {
+      background: var(--color-canvas);
+      border: 1px solid var(--color-hairline-soft);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-float);
+    }
+    .hero-main { padding: 38px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 56, 92, .08);
+      color: var(--color-action);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+    h1 {
+      margin: 0 0 18px;
+      font-size: 44px;
+      line-height: 1.08;
+      letter-spacing: -.04em;
+    }
+    .lead {
+      margin: 0;
+      color: var(--color-body);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+    .hero-side {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .status-card {
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: var(--color-surface-soft);
+      border: 1px solid var(--color-hairline-soft);
+    }
+    .status-card b {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    .status-card span {
+      color: var(--color-muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin: 22px 0 36px;
+    }
+    .metric {
+      padding: 22px;
+    }
+    .metric .num {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--color-action);
+      margin-bottom: 8px;
+    }
+    .metric p {
+      margin: 0;
+      color: var(--color-muted);
+      line-height: 1.55;
+    }
+    section {
+      margin-top: 28px;
+      padding: 30px;
+    }
+    h2 {
+      margin: 0 0 18px;
+      font-size: 26px;
+      letter-spacing: -.02em;
+    }
+    .section-note {
+      margin: -8px 0 22px;
+      color: var(--color-muted);
+      line-height: 1.7;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .card {
+      border: 1px solid var(--color-hairline-soft);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      background: var(--color-canvas);
+    }
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    .card p, li {
+      color: var(--color-body);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+    .card p { margin: 0; }
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .tag {
+      padding: 7px 10px;
+      border-radius: var(--radius-full);
+      background: var(--color-surface-soft);
+      border: 1px solid var(--color-hairline-soft);
+      color: var(--color-muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+    .phase {
+      display: grid;
+      grid-template-columns: 110px 1fr 1fr;
+      gap: 16px;
+      align-items: stretch;
+      padding: 18px;
+      border: 1px solid var(--color-hairline-soft);
+      border-radius: var(--radius-lg);
+      background: var(--color-canvas);
+    }
+    .phase-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 88px;
+      border-radius: var(--radius-md);
+      background: var(--color-ink);
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+    }
+    .phase h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+    }
+    .phase p {
+      margin: 0;
+      color: var(--color-body);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-hairline-soft);
+      background: var(--color-canvas);
+    }
+    th, td {
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--color-hairline-soft);
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+    th {
+      background: var(--color-surface-soft);
+      color: var(--color-ink);
+      font-size: 13px;
+    }
+    tr:last-child td { border-bottom: 0; }
+    .priority {
+      display: inline-flex;
+      padding: 5px 8px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 56, 92, .08);
+      color: var(--color-action);
+      font-weight: 800;
+      font-size: 12px;
+    }
+    .todo {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .todo .card {
+      min-height: 160px;
+    }
+    .footer {
+      margin-top: 28px;
+      color: var(--color-muted);
+      text-align: center;
+      font-size: 13px;
+    }
+    @media (max-width: 900px) {
+      .hero, .grid, .cards, .todo, .phase {
+        grid-template-columns: 1fr;
+      }
+      h1 { font-size: 34px; }
+      .page { padding: 28px 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="hero">
+      <div class="panel hero-main">
+        <div class="eyebrow">当前工作计划 · 2026-06-03</div>
+        <h1>和趣现在要做什么</h1>
+        <p class="lead">
+          当前项目处于产品策划和共识阶段，重点不是立刻开发完整系统，而是把“私域社群变现平台”这件事拆成可验证、可迭代、可交付的计划：先确认边界和场景，再跑人工验证，之后再进入小程序交易闭环、选品中心、经营工具和多端扩展。
+        </p>
+      </div>
+      <aside class="panel hero-side">
+        <div class="status-card">
+          <b>当前阶段</b>
+          <span>V0 前置策划与人工验证准备。产品功能未最终定稿，商品库、订单、分销等仍先沉淀，不急着拆成完整 PRD。</span>
+        </div>
+        <div class="status-card">
+          <b>当前唯一口径</b>
+          <span>以 `01-研究与规划/当前产品策划.md` 为准；历史蓝图、研究报告和旧日志均已归档。</span>
+        </div>
+        <div class="status-card">
+          <b>工作原则</b>
+          <span>先边界、再场景、再版本、再功能。版本按验证门槛推进，不按日历硬推。</span>
+        </div>
+      </aside>
+    </div>
+
+    <div class="grid">
+      <div class="panel metric">
+        <div class="num">2 类</div>
+        <p>核心客户：已有社群经营者、零基础新手群主。</p>
+      </div>
+      <div class="panel metric">
+        <div class="num">P0</div>
+        <p>首发验证优先活动变现和卡券变现。</p>
+      </div>
+      <div class="panel metric">
+        <div class="num">5 期</div>
+        <p>V0 人工验证到 V4 多端与复杂交易。</p>
+      </div>
+    </div>
+
+    <section class="panel">
+      <h2>一、当前要完成的四件事</h2>
+      <p class="section-note">这四件事决定后续能不能进入真实产品设计。现在不应该一上来写完整后台、支付分账或多端开发。</p>
+      <div class="cards">
+        <div class="card">
+          <h3>1. 锁定首发验证边界</h3>
+          <p>确定首发城市、首批团长样本、首批供给数量、活动/卡券/低风险团购的验证范围，以及哪些品类坚决不进入首发。</p>
+          <div class="tag-row">
+            <span class="tag">首发城市</span><span class="tag">团长样本</span><span class="tag">低风险白名单</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>2. 设计 V0 人工验证方案</h3>
+          <p>用人工货盘、表格台账、轻量下单和微信群沟通，先验证真实订单、履约、退款、售后和团长复盘意愿。</p>
+          <div class="tag-row">
+            <span class="tag">真实订单</span><span class="tag">履约记录</span><span class="tag">售后复盘</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>3. 沉淀 MVP 必做/不做清单</h3>
+          <p>把 V1 必须做的交易闭环和暂不做的复杂能力分开，避免商品库、订单、分销、结算同时膨胀。</p>
+          <div class="tag-row">
+            <span class="tag">社群建店</span><span class="tag">开团发布</span><span class="tag">订单售后</span><span class="tag">一级推广</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>4. 更新会议材料和原型</h3>
+          <p>当产品口径稳定后，再把 PPT 和演示原型同步成新结构；PPT 和原型只表达已确认口径，不替产品拍板。</p>
+          <div class="tag-row">
+            <span class="tag">PPT</span><span class="tag">演示原型</span><span class="tag">走查脚本</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>二、当前业务优先级</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>优先级</th>
+            <th>方向</th>
+            <th>现在要做</th>
+            <th>暂不做</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="priority">P0</span></td>
+            <td>活动变现</td>
+            <td>亲子家庭、青年兴趣、创业职场、社区生活等低风险白名单活动；验证报名、核销、退款、复购。</td>
+            <td>高风险户外、多日复杂行程、强效果承诺、医疗健康、金融投资。</td>
+          </tr>
+          <tr>
+            <td><span class="priority">P0</span></td>
+            <td>卡券变现</td>
+            <td>电子券、次卡、体验券、权益包；验证凭证、有效期、核销、售后和复购。</td>
+            <td>复杂权益包、强争议过期规则、无法核销追踪的券。</td>
+          </tr>
+          <tr>
+            <td><span class="priority">P1</span></td>
+            <td>低风险电商</td>
+            <td>标准商品、自提商品、低复杂履约，作为社群交易对照验证。</td>
+            <td>食品生鲜、强售后品类、复杂供应链。</td>
+          </tr>
+          <tr>
+            <td><span class="priority">P1/P2</span></td>
+            <td>本地服务</td>
+            <td>先做到店预约和核销，受控验证服务履约和取消投诉。</td>
+            <td>上门服务、规模化门店服务、复杂改期投诉体系。</td>
+          </tr>
+          <tr>
+            <td><span class="priority">后置</span></td>
+            <td>内容/课程</td>
+            <td>可作为体验课、工作坊、活动或卡券供给出现。</td>
+            <td>独立系统课、讲师分账、强效果承诺培训。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>三、多期计划</h2>
+      <p class="section-note">版本按验证门槛推进。每一期只回答一个关键问题，不用日历硬推。</p>
+      <div class="timeline">
+        <div class="phase">
+          <div class="phase-label">V0</div>
+          <div>
+            <h3>人工验证期</h3>
+            <p>用人工货盘、表格台账、微信群、轻量下单验证真实订单、履约、退款和团长复盘意愿。</p>
+          </div>
+          <div>
+            <h3>交付物</h3>
+            <p>首批供给规则、团长路径、订单台账、售后处理方式、V1 必做/不做边界。</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-label">V1</div>
+          <div>
+            <h3>交易闭环期</h3>
+            <p>同一微信小程序跑通 C 端下单和 B 端经营，帮助新手完成第一团。</p>
+          </div>
+          <div>
+            <h3>交付物</h3>
+            <p>社群建店、供给库基础、开团发布、订单履约、售后服务台、收益账本、一级推广。</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-label">V2</div>
+          <div>
+            <h3>供给放大期</h3>
+            <p>建设选品中心和审核货盘分层，让新手和成熟团长都能持续选品和复用供给。</p>
+          </div>
+          <div>
+            <h3>交付物</h3>
+            <p>推荐供给包、素材包、人工推荐理由、低风险商品/服务受控扩展。</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-label">V3</div>
+          <div>
+            <h3>经营效率期</h3>
+            <p>当小程序 B 端出现高频经营瓶颈，再建设团长 App 或专业 B 端工具。</p>
+          </div>
+          <div>
+            <h3>交付物</h3>
+            <p>经营数据、复购工具、素材管理、订单售后批处理、收益分析。</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-label">V4</div>
+          <div>
+            <h3>多端与复杂交易期</h3>
+            <p>扩展小红书/抖音等 C 端入口和复杂商单，但必须共用统一交易底座。</p>
+          </div>
+          <div>
+            <h3>交付物</h3>
+            <p>多平台归因、复杂商单、内容/课程受控验证，且不拆散货盘、订单、售后和结算。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>四、V1 MVP 必做与不做</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>V1 必须做</h3>
+          <ul>
+            <li>社群建店：注册、社群类型、兴趣标签、专属主页。</li>
+            <li>新手冷启动：模板、首单清单、任务路径。</li>
+            <li>供给库基础：平台审核货盘、人工推荐、责任披露。</li>
+            <li>开团发布：活动报名、卡券团购、低风险普通团购。</li>
+            <li>交易闭环：详情页、购买须知、归因、订单、核销/履约状态。</li>
+            <li>售后与收益：退款工单、责任协同、结算阻断、收益账本。</li>
+            <li>一级推广：固定佣金分享赚、加价帮卖二选一。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>V1 明确不做</h3>
+          <ul>
+            <li>多级分销、发展下级、层层转单。</li>
+            <li>保证金账户、经销商层级、会员分层可见。</li>
+            <li>食品生鲜、医疗美容、上门服务、高风险活动。</li>
+            <li>自动选货、自动上架、自动外部发布营销内容。</li>
+            <li>小红书/抖音消费端、团长 App、复杂商单。</li>
+            <li>独立内容课程体系、讲师分账、强效果承诺培训。</li>
+            <li>支付链路未核验前的真实自动分账或即时打款。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>五、接下来 30 天建议推进</h2>
+      <div class="todo">
+        <div class="card">
+          <h3>第 1 周：锁范围</h3>
+          <p>确定首发城市、首批团长样本、首批供给白名单和 V0 人工验证方式。</p>
+        </div>
+        <div class="card">
+          <h3>第 2 周：跑试单</h3>
+          <p>用活动和卡券优先跑真实或准真实订单，记录履约、退款、售后和团长反馈。</p>
+        </div>
+        <div class="card">
+          <h3>第 3 周：收 MVP</h3>
+          <p>根据试单结果收敛 V1 必做/不做清单，判断哪些功能可以进入 PRD。</p>
+        </div>
+        <div class="card">
+          <h3>第 4 周：改材料</h3>
+          <p>当口径稳定后，更新 PPT、演示原型和走查脚本，让团队按统一版本理解项目。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>六、当前待确认问题</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>问题</th>
+            <th>当前判断</th>
+            <th>影响</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Q001</td>
+            <td>首发城市、首批团长样本和首批供给数量如何定？</td>
+            <td>先按可触达资源和低风险白名单收窄。</td>
+            <td>V0/V1 验证</td>
+          </tr>
+          <tr>
+            <td>Q002</td>
+            <td>V0 进入 V1 的真实订单和履约门槛是什么？</td>
+            <td>不提前写死数字，先看真实试单数据。</td>
+            <td>开发投入</td>
+          </tr>
+          <tr>
+            <td>Q003</td>
+            <td>平台运营在售后纠纷中的介入深度如何界定？</td>
+            <td>平台负责规则、协同和监督，不默认替供给方无限兜底。</td>
+            <td>责任边界</td>
+          </tr>
+          <tr>
+            <td>Q004</td>
+            <td>支付主体、分账、退款回退能力是否可复用？</td>
+            <td>真实自动打款上线前必须专项核验。</td>
+            <td>结算上线</td>
+          </tr>
+          <tr>
+            <td>Q005</td>
+            <td>何时拆出商品库、订单、分销、结算等独立 PRD？</td>
+            <td>等定位、场景优先级、MVP 和版本路线稳定后再拆。</td>
+            <td>PRD 节奏</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <p class="footer">
+      来源：和趣当前产品策划 V6.0、决策与问题台账。本文用于当前工作推进，不替代最终 PRD。
+    </p>
+  </main>
+</body>
+</html>

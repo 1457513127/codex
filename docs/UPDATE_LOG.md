@@ -23,3 +23,20 @@
 - 已完成：旧文档采用归档不删除，仍可追溯。
 
 Notion 同步：已写入 [2026-06-02 - 简化项目整体文档结构](https://www.notion.so/3739f99b7c3981e19c1fea2ab6d7b4d0)，GitHub 提交链接将在发布后补录。
+
+## 2026-06-03 - 生成当前工作计划 HTML 总览
+
+状态：已同步 Notion（GitHub 提交链接将在发布后补录）
+
+目标：把当前要做的内容、分期计划、V1 MVP 边界、30 天建议推进和待确认问题整理成一份可直接打开阅读的 HTML 总览页。
+
+改动：
+- 新增 `01-研究与规划/当前工作计划总览.html`，基于当前产品策划和决策台账生成项目工作计划看板。
+
+设计影响：复用 `design-system/airbnb-tokens.css`，不新增视觉 token，不修改现有 PPT 和演示原型。
+
+验证：
+- 已完成：检查 HTML 文件存在并引用 `design-system/airbnb-tokens.css`。
+- 已完成：确认未修改 PPT 和可点击演示原型。
+
+Notion 同步：已写入 [2026-06-03 - 生成当前工作计划 HTML 总览](https://app.notion.com/p/3749f99b7c398157b063fa16932c8a70)，GitHub 提交链接将在发布后补录。
